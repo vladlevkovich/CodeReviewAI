@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "ping"]
+    restart: unless-stopped
