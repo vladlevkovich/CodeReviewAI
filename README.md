@@ -8,8 +8,6 @@ Automatic code verification from GPT
 - [Installation](#installation)
 - [Run](#run)
 - [Testing](#testing)
-- [Usage](#usage)
-- [License](#license)
 
 ## Requirements
 
@@ -26,7 +24,7 @@ Before you start, make sure you have what you need:
    git clone https://github.com/vladlevkovich/CodeReviewAI.git
    cd repo```
 
-2. Venv
+2. Installation
 ```
 python -m venv venv
 source venv/bin/activate  # Linux / macOS
@@ -35,3 +33,13 @@ venv\Scripts\activate  # Windows
 ```
 poetry install
 ```
+## Run
+```
+uvicorn app.main:app
+```
+## Testing
+```
+pytest
+```
+
+
