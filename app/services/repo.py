@@ -15,7 +15,7 @@ class GitHubRepoParser:
         self.git_auth = Auth.Token(os.getenv('GITHUB_KEY'))
         self.g = Github(auth=self.git_auth)
 
-    def get_repo(self, repo_name: str):
+    def get_repo(self, repo_name: str) -> Repository:
         try:
             return self.g.get_repo(repo_name)
         except BadCredentialsException:
@@ -25,7 +25,7 @@ class GitHubRepoParser:
             logger.error(f'Failed to get repo {repo_name}: {e}')
             raise
 
-    def get_repo_content(self, repo_name: str):
+    def get_repo_content(self, repo_name: str) -> list:
         """отримуємо структуру проекта"""
         cache_key = f'github_repo_content:{repo_name}'
         cache_content = rd.get_data(cache_key)
@@ -51,7 +51,7 @@ class GitHubRepoParser:
             logger.error(f'Failed to get contents for repo {repo_name}: {e}')
             raise
 
-    def read_file_content(self, repo_name: str, retries: int = 4):
+    def read_file_content(self, repo_name: str) -> list:
         cache_key = f'github_repo_file_read:{repo_name}'
         cache_file_read = rd.get_data(cache_key)
         if cache_file_read:

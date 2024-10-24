@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException
-from github import GithubException
 from app.schemas.schema import RepoSchema
 from app.services.repo import r
 from app.services.gpt import check_code
@@ -9,7 +8,7 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 @router.post('/review')
-async def code_review(data: RepoSchema):
+async def code_review(data: RepoSchema) -> dict:
     try:
         repo_data = r.read_file_content(data.github_repo_url)
         if not repo_data:
@@ -24,7 +23,7 @@ async def code_review(data: RepoSchema):
         return {'message': res}
     except Exception as e:
         logger.error(f'{e}')
-        return HTTPException(
+        raise HTTPException(
             detail=str(e),
             status_code=400
         )

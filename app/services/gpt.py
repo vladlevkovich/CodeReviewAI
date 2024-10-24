@@ -8,7 +8,7 @@ import os
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-def check_code(task_description: str, structure, file_path: str, code: str, candidate_level: str):
+def check_code(task_description: str, structure, file_path: str, code: str, candidate_level: str) -> dict:
     max_retires = 5     # максимальна кількість спроб якщо запит не відбувся
     retry_attempts = 0
     wait_time = 10
@@ -36,7 +36,6 @@ def check_code(task_description: str, structure, file_path: str, code: str, cand
     )
     while retry_attempts <= max_retires:
         try:
-            response_blocks = {}
             client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
             chat_completion = client.chat.completions.create(
                 model='gpt-4-turbo',
