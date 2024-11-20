@@ -42,12 +42,3 @@ uvicorn app.main:app
 pytest
 ```
 
-## Part 2
-
-To scale an automated code review tool, I would consider a microservice architecture with
-using asynchronous queues to process requests in the background. Caching data with Redis
-will reduce the number of requests to the GitHub API, which will speed up the processing of repeated requests. 
-To handle the use of the OpanAI API GitHub API, I would implement speed limiting mechanisms at the service level
-and cache some of the responses.
-
-
